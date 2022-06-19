@@ -13,7 +13,7 @@ const eventSchema = new mongoose.Schema({
     description: { type: String, required: true },
     date: { type: Date, required: true },
     location: { type: String, required: true },
-    eventProperties: { type: [String], required: true}
+    eventProperties: { type: [Number], required: true}
 });
 
 export const Event = mongoose.model<EventModel>("Event", eventSchema);
