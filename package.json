@@ -14,6 +14,7 @@
     "express-validator": "^6.14.2",
     "mongoose": "^6.4.0",
     "moran": "^0.0.11",
+    "morgan": "^1.10.0",
     "socket.io": "^4.5.1",
     "typescript": "^4.7.4"
   }
