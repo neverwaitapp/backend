@@ -1,5 +1,3 @@
-import { config } from "dotenv";
-config()
 import http from "http";
 import express, { Request, Response } from "express";
 import { Server } from "socket.io"
@@ -8,7 +6,10 @@ import cors from "cors";
 import path from "path";
 import morgan from "morgan";
 import { SocketInit } from "./socketio";
-
+import { config } from "dotenv";
+config();
+import { eventRouter } from "./routes/event.routes";
+import { bookingRouter } from "./routes/booking.routes";
 
 const app = express();
 
@@ -19,15 +20,16 @@ export const io = new Server(server, {
 new SocketInit(io);
 
 mongoose.
-    connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true }).
+    connect(process.env.MONGO_URI).
     then(() => console.log("Connected to MongoDB")).
     catch(err => console.log(err));
 
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.set("view engine", "ejs");
 app.use(cors());
-
+app.use(eventRouter, bookingRouter);
 app.get("/", (req: Request, res: Response) => {
     res.status(200).json({ message: "Hello World" });
 })

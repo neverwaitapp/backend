@@ -13,7 +13,7 @@ const bookingSchema = new mongoose.Schema({
     name: { type: String, required: true },
     email: { type: String, required: true },
     phone: { type: String, required: true },
-    guests: { type: Number, required: true }
+    guests: { type: Number, required: true, default: 1, min: 1, max: 2 }
 });
 
 export const Booking = mongoose.model<BookingModel>("Booking", bookingSchema);
